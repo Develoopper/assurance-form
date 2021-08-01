@@ -1,88 +1,109 @@
-$(document).ready(function() {
-  console.log("window is loaded");
-
-  const inputs = [
-    'marque',
-    'model',
-    'chevaux',
-    'fonction'
-  ]
-  
+$(function() {  
   const fonctions = [
     'personnelle',
     'taxi',
   ]
 
-  const marques = [
-    { 
-      nom: "Audi",
-      models: [
-        { 
-          nom: "Audi - model 1", 
-          chevaux: [5, 7, 8] 
-        },
-        { 
-          nom: "Audi - model 2", 
-          chevaux: [9, 10, 11] 
-        },
-        { 
-          nom: "Audi - model 3", 
-          chevaux: [12, 13, 14] 
-        },
-        { 
-          nom: "Audi - model 4", 
-          chevaux: [15, 16, 17] 
-        },
-      ],
-    },
-    { 
-      nom: "Mercedes",
-      models: [
-        { 
-          nom: "Audi - model 1", 
-          chevaux: [5, 7, 8] 
-        },
-        { 
-          nom: "Audi - model 3", 
-          chevaux: [12, 13, 14] 
-        },
-      ],
-    },
-    { 
-      nom: "BMW",
-      models: [
-        { 
-          nom: "Audi - model 2", 
-          chevaux: [9, 10, 11] 
-        },
-        { 
-          nom: "Audi - model 4", 
-          chevaux: [15, 16, 17] 
-        },
-      ],
-    },
-  ]
+  const data = {
+    'Marque': [
+      { 
+        valeur: "Audi",
+        'Model': [
+          { 
+            valeur: "Audi - model 1", 
+            'Chevaux': [5, 7, 8] 
+          },
+          { 
+            valeur: "Audi - model 2", 
+            'Chevaux': [9, 10, 11] 
+          },
+          { 
+            valeur: "Audi - model 3", 
+            'Chevaux': [12, 13, 14] 
+          },
+          { 
+            valeur: "Audi - model 4", 
+            'Chevaux': [15, 16, 17] 
+          },
+        ],
+      },
+      { 
+        valeur: "Mercedes",
+        'Model': [
+          { 
+            valeur: "Mercedes - model 1", 
+            'Chevaux': [5, 7, 8] 
+          },
+          { 
+            valeur: "Mercedes - model 3", 
+            'Chevaux': [12, 13, 14] 
+          },
+        ],
+      },
+      { 
+        valeur: "BMW",
+        'Model': [
+          { 
+            valeur: "BMW - model 2", 
+            'Chevaux': [9, 10, 11] 
+          },
+          { 
+            valeur: "BMW - model 4", 
+            'Chevaux': [15, 16, 17] 
+          },
+        ],
+      },
+    ]
+  }
 
+  let lastInput = {
+    id: 'Marque', 
+    data: data['Marque']
+  };
 
-  for (let i = 0; i < inputs.length; i++) {
-    $('#' + inputs[i]).on('change', function(e) {
-      
-      const selected = marques.filter(marque => marque.nom === e.target.value)[0]
-    
-      $('#' + inputs[i + 1]).val(selected.nom)
-      for (let i = 0; i < marques.length; i++) {
-        let marque = marques[i]
-        $('#marque').append(`<option value='${marque.nom}'>${marque.nom}</option>`)
-      }
-
-      for (let j = i + 2; j < inputs.length; j++)
-        $('#' + inputs[j]).val('')
-
+  function onChangeHandler() {
+    $('#' + lastInput.id).on('change', function(e) {
+      if (e.target.value === '')
+        return;
+  
+      const selected = lastInput.data.filter(x => x.valeur === e.target.value)[0];
+      const nextInputId = Object.keys(selected)[1];
+      const nextInputData = selected[nextInputId];
+  
+      $('#form').append(`
+        <label for="${nextInputId}" class="form-label">${nextInputId}</label>
+        <select class="form-select mb-3" id='${nextInputId}'>
+          <option value=""></option>
+          ${nextInputData.map(x => `<option value="${x.valeur}">${x.valeur}</option>`)}
+        </select>
+      `)
+  
+      lastInput = { id: nextInputId, data: nextInputData };
+      onChangeHandler()
     })
   }
-
-  for (let i = 0; i < marques.length; i++) {
-    let marque = marques[i]
-    $('#marque').append(`<option value='${marque.nom}'>${marque.nom}</option>`)
+  
+  for (let i = 0; i < data['Marque'].length; i++) {
+    let marque = data['Marque'][i];
+    $('#Marque').append(`<option value='${marque.valeur}'>${marque.valeur}</option>`)
   }
+
+  onChangeHandler();
+
+  // for (let i = 0; i < inputs.length; i++) {
+  //   $('#' + inputs[i]).on('change', function(e) {
+      
+  //     const selected = marques.filter(marque => marque.valeur === e.target.value)[0]
+    
+  //     $('#' + inputs[i + 1]).val(selected.valeur)
+  //     for (let i = 0; i < marques.length; i++) {
+  //       let marque = marques[i]
+  //       $('#' + inputs[i + 1]).append(`<option value='${marque.valeur}'>${marque.valeur}</option>`)
+  //     }
+
+  //     for (let j = i + 2; j < inputs.length; j++)
+  //       $('#' + inputs[j]).val('')
+
+  //   })
+  // }
 });
