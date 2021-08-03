@@ -1,178 +1,98 @@
 $(function() {  
   const dataToSubmit = {};
 
-  const rootPath = [
-    {
-      valeur: 'root',
-      nextId: 'Marque',
-      path: [
-        { 
-          valeur: "Audi",
-          nextId: 'Model',
-          path: [
-            { 
-              valeur: "Audi - model 1", 
-              nextId: 'Chevaux',
-              path: {
-                valeurs: ['5', '7', '8'],
-                nextId: 'Carburant',
-                path: [
-                  { 
-                    valeur: "Diesel", 
-                    nextId: 'Fonction',
-                    path: {
-                      valeurs: ['Personnelle', 'Taxi'],
-                    },
-                  },
-                  { 
-                    valeur: "Essence", 
-                    nextId: 'Parking',
-                    path: {
-                      valeurs: ['Garage'],
-                    },
-                  },
-                ]
-              }
-            },
-            { 
-              valeur: "Audi - model 2", 
-              nextId: 'Chevaux',
-              path: {
-                valeurs: [9, 10, 11],
-              },
-            },
-            { 
-              valeur: "Audi - model 3", 
-              nextId: 'Chevaux',
-              path: {
-                valeurs: [12, 13, 14],
-              } 
-            },
-            { 
-              valeur: "Audi - model 4", 
-              nextId: 'Chevaux',
-              path: {
-                valeurs: [15, 16, 17],
-              } 
-            },
-          ],
-        },
-        { 
-          valeur: "Mercedes",
-          nextId: 'Model',
-          path: [
-            { 
-              valeur: "Mercedes - model 1", 
-              nextId: 'Chevaux',
-              path: {
-                valeurs: [5, 7, 8],
-              }
-            },
-            { 
-              valeur: "Mercedes - model 3", 
-              nextId: 'Chevaux',
-              path: {
-                valeurs: [12, 13, 14],
-              } 
-            },
-          ],
-        },
-        { 
-          valeur: "BMW",
-          nextId: 'Model',
-          path: [
-            { 
-              valeur: "BMW - model 2", 
-              nextId: 'Chevaux',
-              path: {
-                valeurs: [9, 10, 11],
-              } 
-            },
-            { 
-              valeur: "BMW - model 4", 
-              nextId: 'Chevaux',
-              path: {
-                valeurs: [15, 16, 17],
-              } 
-            },
-          ],
-        },
-      ],
-    }
-  ];
-
-  // for (let i = 0; i < rootPath.length; i++) {
-  //   let marque = rootPath[i];
-  //   $('#Marque').append(`<option value='${marque.valeur}'>${marque.valeur}</option>`)
-  // }
-
-  let lastInput = { id: 'root', nextId: 'Marque', path: rootPath };
+  let first = true;
+  let lastInput = { id: 'root', options: rootNextOptions };
+  const inputs = [lastInput];
 
   function onChangeHandler() {
     $('#' + lastInput.id).on('change', function(e) {
+      const ids = inputs.map(input => input.id);
+      let i = 0;
+      let index = null;
+      for (const id of ids) {
+        if (id === e.target.id)
+          index = i;
+        i++;
+      }
+      $("#form div").slice(index + 1).remove();
+      inputs.splice(index + 1);
+      console.log('k', inputs);
+
+      lastInput = inputs[index];
+
       if (e.target.value === '')
         return;
 
-      let nextInputId = null;
-      let nextInputNextId = null;
-      let nextInputPath = null;
-      let nextInputValues = null;
+      if (lastInput.id !== 'root')
+        dataToSubmit[lastInput.id] = e.target.value;
+      console.log(dataToSubmit);
+      
+      if (!Array.isArray(lastInput.options) && !lastInput.options.nextOptions) {
+        $('#form').append(`
+          <div>
+            <button type="button" id="submit" class="btn btn-dark">
+              Submit
+            </button
+          </div>
+        `)
 
-      if (Array.isArray(lastInput.path)) {
-        selected = lastInput.path.filter(x => x.valeur === e.target.value)[0];
-        nextInputId = selected.nextId;
-        nextInputPath = selected.path;
-      } else {
-        nextInputId = lastInput.nextId;
-        nextInputNextId = lastInput.path.nextId;
-        nextInputPath = lastInput.path.path;
+        $('#submit').on('click', function() {
+          $.post('http://example.com/form.php', dataToSubmit);
+        })
+        return;
       }
       
-      console.log('nextInputId', nextInputId);
-      console.log('nextInputNextId', nextInputNextId);
-      if (!nextInputId)
-        return;
-
-      if (Array.isArray(nextInputPath))
-        nextInputValues = nextInputPath.map(x => x.valeur);
-      else
-        nextInputValues = nextInputPath.valeurs;
-
-      let options = '';
-      for (const value of nextInputValues)
-        options += `<option value="${value}">${value}</option>`
-
+      let id = null;
+      let options = null;
+      let optionsValues = null;
+      
+      if (Array.isArray(lastInput.options)) {
+        const selected = lastInput.options.filter(x => x.value === e.target.value)[0];
+        id = selected.nextId;
+        options = selected.nextOptions;
+        if (Array.isArray(options))
+        optionsValues = options.map(x => x.value);
+        else
+        optionsValues = options.values;
+      } else {
+        id = lastInput.options.nextId;
+        options = lastInput.options.nextOptions;
+        if (Array.isArray(options))
+        optionsValues = options.map(x => x.value);
+        else
+        optionsValues = options.values;
+      }
+      
+      let html = '';
+      for (const optionValue of optionsValues)
+      html += `<option value="${optionValue}">${optionValue}</option>`
+      
       $('#form').append(`
-        <label for="${nextInputId}" class="form-label">${nextInputId}</label>
-        <select class="form-select mb-3" id='${nextInputId}'>
-          <option value=""></option>
-          ${options}
-        </select>
+        <div>
+          <label for="${id}" class="form-label">${id}</label>
+          <select class="form-select mb-3" id='${id}'>
+            <option value=""></option>
+            ${html}
+          </select>
+        </div>
       `)
-  
-      lastInput = { id: nextInputId, nextId: nextInputNextId, path: nextInputPath };
-
+      
+      console.log(id);
+      
+      lastInput = { id, options };
+      if (first) {
+        inputs[0] = lastInput;
+        first = false;
+      } else {
+        inputs.push(lastInput);
+      }
+      console.log(inputs);
+      
       onChangeHandler();
     })
   }
 
   onChangeHandler();
-  $('#root').trigger('change', 'root');
-
-  // for (let i = 0; i < inputs.length; i++) {
-  //   $('#' + inputs[i]).on('change', function(e) {
-      
-  //     const selected = marques.filter(marque => marque.valeur === e.target.value)[0]
-    
-  //     $('#' + inputs[i + 1]).val(selected.valeur)
-  //     for (let i = 0; i < marques.length; i++) {
-  //       let marque = marques[i]
-  //       $('#' + inputs[i + 1]).append(`<option value='${marque.valeur}'>${marque.valeur}</option>`)
-  //     }
-
-  //     for (let j = i + 2; j < inputs.length; j++)
-  //       $('#' + inputs[j]).val('')
-
-  //   })
-  // }
+  $('#root').trigger('change');
 });
