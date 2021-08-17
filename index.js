@@ -94,17 +94,28 @@ $(function() {
         for (let i = 0; i < keys.length; i++) {
           if (i >= keys.indexOf(id))
             break;
-            
-          const _id = keys[i] === 'year' ? 'dateMEC' : 'year';
-          const _val = keys[i] === 'year' ? $('#' + _id).val().split('-')[0] : $('#' + _id).val();
+          
+          const _id = keys[i] === 'year' ? 'dateMEC' : keys[i];
+          const __val = i === keys.indexOf(id) - 1 ? e.target.value : $('#' + _id).val();
+          const _val = keys[i] === 'year' ? __val.split('-')[0] : __val;
+          console.log('..' + keys[i]);
+          console.log('..' + _val);
           params += i > 0 ? '&' : '' + keys[i] + '=' + _val;
         }
         console.log(baseUrl + carAPIURLs[id] + params);
         const res = $.ajax({ 
-          type: "GET", 
+          type: "GET",
+          dataType: 'json',
           url: baseUrl + carAPIURLs[id] + params, 
           async: false,
         }).responseText;
+
+        console.log(res);
+        const jsonRes = JSON.parse(res);
+        optionsValues = [
+          ...jsonRes.marquesPopular.map(x => x.marque),
+          ...jsonRes.marquesNotPopular.map(x => x.marque)
+        ].sort()
       }
 
       let html = '';
