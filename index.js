@@ -100,7 +100,7 @@ $(function() {
           const _val = keys[i] === 'year' ? __val.split('-')[0] : __val;
           console.log('..' + keys[i]);
           console.log('..' + _val);
-          params += i > 0 ? '&' : '' + keys[i] + '=' + _val;
+          params += (i > 0 ? '&' : '') + keys[i] + '=' + _val;
         }
         console.log(baseUrl + carAPIURLs[id] + params);
         const res = $.ajax({ 
@@ -112,10 +112,16 @@ $(function() {
 
         console.log(res);
         const jsonRes = JSON.parse(res);
-        optionsValues = [
-          ...jsonRes.marquesPopular.map(x => x.marque),
-          ...jsonRes.marquesNotPopular.map(x => x.marque)
-        ].sort()
+        if (id === 'marque') {
+          optionsValues = [
+            ...jsonRes.marquesPopular.map(x => x.marque),
+            ...jsonRes.marquesNotPopular.map(x => x.marque)
+          ].sort()
+        } else {
+          const routeArray = carAPIURLs[id].split('/');
+          const plural = routeArray[routeArray.length - 1];
+          optionsValues = [...jsonRes[plural].map(x => x[id])].sort();
+        }
       }
 
       let html = '';
