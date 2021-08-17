@@ -14,15 +14,6 @@ $(function() {
   let lastInput = { id: 'dateMEC', label: 'Date de mise en circulation', options: rootNextOptions };
   const inputs = [lastInput];
 
-  const loading = false;
-  const spinner = `
-    <div id='spinner' class="text-center">
-      <div class="spinner-border" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-    </div>
-  `
-
   function onChangeHandler() {
     $('#' + lastInput.id).on('change', function(e) {
       // find the index of the input in the inputs list
@@ -167,7 +158,6 @@ $(function() {
         `)
       }
       
-      
       lastInput = { id, label, options };
       inputs.push(lastInput);
       
@@ -176,4 +166,4 @@ $(function() {
   }
 
   onChangeHandler();
-});
+})

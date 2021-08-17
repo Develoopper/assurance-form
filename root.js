@@ -31,6 +31,26 @@ var rootNextOptions = {
 									nextLabel: "Question 2",
 									nextOptions: {
 										values: 'input',
+										nextId: 'question3',
+										nextLabel: 'Question 3',
+										nextOptions: [
+											{
+												value: 'Oui',
+												nextId: 'question4',
+												nextLabel: 'Question 4',
+												nextOptions: {
+													values: ['1', '2']
+												}
+											},
+											{
+												value: 'Non',
+												nextId: 'question5',
+												nextLabel: 'Question 5',
+												nextOptions: {
+													values: ['3', '4']
+												}
+											}
+										]
 									},
 							},
 						},
