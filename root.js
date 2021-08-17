@@ -23,6 +23,16 @@ var rootNextOptions = {
 						nextLabel: "Version",
 						nextOptions: {
 							values: 'ajax',
+							nextId: "question1",
+							nextLabel: "Question 1",
+							nextOptions: {
+								values: 'input',
+								nextId: "question2",
+									nextLabel: "Question 2",
+									nextOptions: {
+										values: 'input',
+									},
+							},
 						},
 					},
 				},

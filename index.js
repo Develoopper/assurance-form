@@ -14,6 +14,15 @@ $(function() {
   let lastInput = { id: 'dateMEC', label: 'Date de mise en circulation', options: rootNextOptions };
   const inputs = [lastInput];
 
+  const loading = false;
+  const spinner = `
+    <div id='spinner' class="text-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  `
+
   function onChangeHandler() {
     $('#' + lastInput.id).on('change', function(e) {
       // find the index of the input in the inputs list
@@ -103,12 +112,23 @@ $(function() {
           params += (i > 0 ? '&' : '') + keys[i] + '=' + _val;
         }
         console.log(baseUrl + carAPIURLs[id] + params);
+        
+        $('#form').append(`
+          <div id='spinner' class="text-center">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        `)
+
         const res = $.ajax({ 
           type: "GET",
           dataType: 'json',
           url: baseUrl + carAPIURLs[id] + params, 
           async: false,
         }).responseText;
+
+        $('#spinner').remove();
 
         console.log(res);
         const jsonRes = JSON.parse(res);
@@ -124,19 +144,29 @@ $(function() {
         }
       }
 
-      let html = '';
-      for (const optionValue of optionsValues)
-        html += `<option value="${optionValue}">${optionValue}</option>`;
+      if (optionsValues !== 'input') {
+        let html = '';
+        for (const optionValue of optionsValues)
+          html += `<option value="${optionValue}">${optionValue}</option>`;
+        
+        $('#form').append(`
+          <div>
+            <label for="${id}" class="form-label">${label}</label>
+            <select class="form-select mb-3" id='${id}'>
+              <option value=""></option>
+              ${html}
+            </select>
+          </div>
+        `)
+      } else {
+        $('#form').append(`
+          <div>
+            <label for="${id}" class="form-label">${label}</label>
+            <input id="${id}" class="form-control mb-3">
+          </div>
+        `)
+      }
       
-      $('#form').append(`
-        <div>
-          <label for="${id}" class="form-label">${label}</label>
-          <select class="form-select mb-3" id='${id}'>
-            <option value=""></option>
-            ${html}
-          </select>
-        </div>
-      `)
       
       lastInput = { id, label, options };
       inputs.push(lastInput);
