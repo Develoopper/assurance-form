@@ -11,11 +11,12 @@ $(function() {
   };
   const dataToSubmit = {};
 
-  let lastInput = { id: 'dateMEC', label: 'Date de mise en circulation', options: rootNextOptions };
+  let lastInput = { id: 'dateMEC', label: 'Date de mise en circulation', options: vehicule };
   const inputs = [lastInput];
 
   function onChangeHandler() {
     $('#' + lastInput.id).on('change', function(e) {
+      console.log('.');
       // find the index of the input in the inputs list
       const ids = inputs.map(input => input.id);
       const index = ids.indexOf(e.target.id);
@@ -25,10 +26,9 @@ $(function() {
       inputs.splice(index + 1);
       // remove following inputs from the dataToSubmit object
       const _ids = inputs.map(x => x.id);
-      Object.keys(dataToSubmit).map(key => {
+      for (const key in dataToSubmit)
         if (!_ids.includes(key))
           delete dataToSubmit[key];
-      })
 
       lastInput = inputs[index];
 
@@ -62,6 +62,7 @@ $(function() {
         return;
       }
       
+      let title = null;
       let id = null;
       let label = null;
       let options = null;
@@ -70,6 +71,7 @@ $(function() {
       // make the data of the new input
       if (Array.isArray(lastInput.options)) {
         const selected = lastInput.options.filter(x => x.value === e.target.value)[0];
+        title = selected.nextTitle;
         id = selected.nextId;
         label = selected.nextLabel;
         options = selected.nextOptions;
@@ -78,6 +80,7 @@ $(function() {
         else
           optionsValues = options.values;
       } else {
+        title = lastInput.options.nextTitle;
         id = lastInput.options.nextId;
         label = lastInput.options.nextLabel;
         options = lastInput.options.nextOptions;
@@ -135,6 +138,8 @@ $(function() {
         }
       }
 
+      const _title = `<h1 class="mb-3 mt-5">${title}</h1>`;
+
       if (optionsValues !== 'input') {
         let html = '';
         for (const optionValue of optionsValues)
@@ -142,6 +147,7 @@ $(function() {
         
         $('#form').append(`
           <div>
+            ${title ? _title : ''}
             <label for="${id}" class="form-label">${label}</label>
             <select class="form-select mb-3" id='${id}'>
               <option value=""></option>
@@ -152,13 +158,14 @@ $(function() {
       } else {
         $('#form').append(`
           <div>
+            ${title ? _title : ''}
             <label for="${id}" class="form-label">${label}</label>
             <input id="${id}" class="form-control mb-3">
           </div>
         `)
       }
       
-      lastInput = { id, label, options };
+      lastInput = { title, id, label, options };
       inputs.push(lastInput);
       
       onChangeHandler();
