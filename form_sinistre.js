@@ -3,7 +3,7 @@ var form_sinistre = {
 	nextId: "dateSinistre36DerniersMois",
 	nextLabel: "Date sinistre",
 	nextOptions: {
-		values: "input",
+		values: "text",
 		nextId: "natureSinistre36DerniersMois",
 		nextLabel: "Nature sinistre",
 		nextOptions: [

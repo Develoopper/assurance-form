@@ -12,7 +12,7 @@ $(function() {
 
   const formData = {};
 
-  let lastInput = { id: 'dateMEC', label: 'Date de mise en circulation', options: vehicule };
+  let lastInput = { id: 'dateMEC', options: vehicule };
   const inputs = [lastInput];
 
   function onChangeHandler() {
@@ -75,6 +75,7 @@ $(function() {
         title = selected.nextTitle;
         id = selected.nextId;
         label = selected.nextLabel;
+        type = selected.nextType;
         options = selected.nextOptions;
         if (Array.isArray(options))
           optionsValues = options.map(x => x.value);
@@ -84,6 +85,7 @@ $(function() {
         title = lastInput.options.nextTitle;
         id = lastInput.options.nextId;
         label = lastInput.options.nextLabel;
+        type = lastInput.options.nextType;
         options = lastInput.options.nextOptions;
         if (Array.isArray(options))
           optionsValues = options.map(x => x.value);
@@ -141,7 +143,15 @@ $(function() {
 
       const _title = `<h1 class="mb-3 mt-5">${title}</h1>`;
 
-      if (optionsValues !== 'input') {
+      if (optionsValues === 'text' || optionsValues === 'date') {
+        $('#form').append(`
+          <div>
+            ${title ? _title : ''}
+            <label for="${id}" class="form-label">${label}</label>
+            <input id="${id}" type="${optionsValues}" class="form-control mb-3">
+          </div>
+        `)
+      } else {
         let html = '';
         for (const optionValue of optionsValues)
           html += `<option value="${optionValue}">${optionValue}</option>`;
@@ -156,17 +166,9 @@ $(function() {
             </select>
           </div>
         `)
-      } else {
-        $('#form').append(`
-          <div>
-            ${title ? _title : ''}
-            <label for="${id}" class="form-label">${label}</label>
-            <input id="${id}" class="form-control mb-3">
-          </div>
-        `)
-      }
+      }  
       
-      lastInput = { title, id, label, options };
+      lastInput = { title, id, options };
       inputs.push(lastInput);
       
       onChangeHandler();

@@ -18,7 +18,7 @@ var cas_alcoolemie36DerniersMois = {
           nextId: "tauxAlcoolemie",
           nextLabel: "Taux alcoolémie",
           nextOptions: {
-            values: 'input'
+            values: 'text'
           },
         },
       },

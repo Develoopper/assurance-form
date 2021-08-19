@@ -3,7 +3,7 @@ var form_antecedant = {
 	nextId: "bonusMalus",
 	nextLabel: "Bonus Malus",
 	nextOptions: {
-		values: "input",
+		values: "text",
 		nextId: "isEteAssure36DerniersMois",
 		nextLabel: "Assuré au cours des 36 derniers mois",
 		nextOptions: {
@@ -11,7 +11,7 @@ var form_antecedant = {
 			nextId: "periodeAssure36DerniersMois",
 			nextLabel: "Nombre mois assuré au cours des 36 derniers mois",
 			nextOptions: {
-				values: "input",
+				values: "text",
 				nextId: "isAssure36DerniersMoisAvec9MoisConsecutifs",
 				nextLabel: "Assuré 9 mois consécutifs ?",
 				nextOptions: {
@@ -23,7 +23,7 @@ var form_antecedant = {
 						nextId: "dateResiliation36DerniersMois",
 						nextLabel: "Date résiliation",
 						nextOptions: {
-							values: "input",
+							values: "date",
 							nextId: "garantieSouhaiteeConducteurPrincipal",
 							nextLabel: "Garanties souhaitées",
 							nextOptions: {

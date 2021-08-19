@@ -2,7 +2,7 @@ var cas_nonPaiment = {
   nextId: "dureeNonPaiement",
   nextLabel: "Nombre de mois en non-paiement",
   nextOptions: {
-    values: 'input',
+    values: 'text',
     nextId: "nombreAssureursResiliationNonPaiement",
     nextLabel: "Nombre assureur depuis le non-paiement",
     nextOptions: {

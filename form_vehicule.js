@@ -22,11 +22,11 @@ var vehicule = {
 						nextId: "version",
 						nextLabel: "Version",
 						nextOptions: {
-							values: 'input',
+							values: 'text',
               nextId: "codeGta",
               nextLabel: "Code GTA",
               nextOptions: {
-                values: 'input',
+                values: 'text',
                 nextId: "stationnement",
                 nextLabel: "Stationnement",
                 nextOptions: {
@@ -38,7 +38,7 @@ var vehicule = {
                     nextId: "codePostalPro",
                     nextLabel: "Code postal professionnel",
                     nextOptions: {
-                      values: 'input',
+                      values: 'text',
                       nextId: "titulaireCarteGrise",
                       nextLabel: "Titulaire carte grise",
                       nextOptions: {
