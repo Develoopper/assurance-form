@@ -15,7 +15,7 @@ var cas_nonPaiment = {
         nextLabel: "Contentieux soldé ?",
         nextOptions: {
           values: ['Non', 'Oui'],
-          ...sinistre
+          ...form_sinistre
         }
       }
     }

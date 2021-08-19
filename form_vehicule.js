@@ -63,7 +63,7 @@ var vehicule = {
                                 nextLabel: "Actuellement assure",
                                 nextOptions: {
                                   values: ['Oui', 'NON_DEPUIS_MOINS_DE_3_MOIS', 'NON_DEPUIS_MOINS_DE_6_MOIS', 'NON_DEPUIS_MOINS_DE_12_MOIS', 'NON_DEPUIS_12_MOIS_ET_PLUS'],
-                                  ...antecedant,
+                                  ...form_antecedant,
                                 },
                               },
                             },

@@ -9,7 +9,8 @@ $(function() {
     carrosserie:  'cars/marque/model/alimentation/chevaux/carrosseries',
     version:  'cars/marque/model/alimentation/chevaux/carrosserie/versions',
   };
-  const dataToSubmit = {};
+
+  const formData = {};
 
   let lastInput = { id: 'dateMEC', label: 'Date de mise en circulation', options: vehicule };
   const inputs = [lastInput];
@@ -24,20 +25,20 @@ $(function() {
       $("#form div").slice(index + 1).remove();
       // remove following inputs from the input list
       inputs.splice(index + 1);
-      // remove following inputs from the dataToSubmit object
+      // remove following inputs from the formData object
       const _ids = inputs.map(x => x.id);
-      for (const key in dataToSubmit)
+      for (const key in formData)
         if (!_ids.includes(key))
-          delete dataToSubmit[key];
+          delete formData[key];
 
       lastInput = inputs[index];
 
       if (e.target.value === '')
         return;
 
-      // add input to the dataToSubmit object
-      dataToSubmit[lastInput.id] = e.target.value;
-      console.log(dataToSubmit);
+      // add input to the formData object
+      formData[lastInput.id] = e.target.value;
+      console.log(formData);
 
       // // if the input is one of the car api params add its values to carApiURLs
       // if (Object.keys(carApiURLs).includes(lastInput.id))
@@ -54,7 +55,7 @@ $(function() {
         `)
 
         $('#submit').on('click', function() {
-          $.ajax({ type: "POST", url: "http://example.com/form.php", data: dataToSubmit, dataType: 'json',
+          $.ajax({ type: "POST", url: "http://example.com/form.php", data: formData, dataType: 'json',
             success: function(data) { console.log("success", data); },
             error: function(error) { console.log("error", error); }
           })

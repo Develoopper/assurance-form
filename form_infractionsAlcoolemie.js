@@ -1,4 +1,4 @@
-var infractionsAlcoolemie = {
+var form_infractionsAlcoolemie = {
 	nextTitle: "Informations infractions alcoolémie",
 	nextId: "dateDernierAlcoolemie36DerniersMois",
 	nextLabel: "Date du teste infraction",

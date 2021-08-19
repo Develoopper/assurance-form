@@ -15,7 +15,7 @@ var cas_sinistreCorporel = {
         nextLabel: "Présence tierce ?",
         nextOptions: {
           values: ['Non', 'Oui'],
-          ...infractionsAlcoolemie
+          ...form_infractionsAlcoolemie
         }
       }
     }
