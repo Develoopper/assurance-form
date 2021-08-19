@@ -12,11 +12,12 @@ $(function() {
 
   const formData = {};
 
-  let lastInput = { id: 'dateMEC', options: vehicule };
+  let lastInput = { id: 'dateMEC', x: 'y', options: vehicule };
   const inputs = [lastInput];
 
   function onChangeHandler() {
     $('#' + lastInput.id).on('change', function(e) {
+      
       console.log('.');
       // find the index of the input in the inputs list
       const ids = inputs.map(input => input.id);
@@ -30,11 +31,17 @@ $(function() {
       for (const key in formData)
         if (!_ids.includes(key))
           delete formData[key];
-
-      lastInput = inputs[index];
+      
+      console.log(inputs);
+      // lastInput = inputs[index];
+      lastInput = inputs[inputs.length - 1];
 
       if (e.target.value === '')
         return;
+      
+      if (lastInput.validator)
+        if (!lastInput.validator(e.target.value))
+          return;
 
       // add input to the formData object
       formData[lastInput.id] = e.target.value;
@@ -68,6 +75,7 @@ $(function() {
       let label = null;
       let options = null;
       let optionsValues = null;
+      let validator = null;
 
       // make the data of the new input
       if (Array.isArray(lastInput.options)) {
@@ -77,6 +85,7 @@ $(function() {
         label = selected.nextLabel;
         type = selected.nextType;
         options = selected.nextOptions;
+        validator = selected.nextValidator;
         if (Array.isArray(options))
           optionsValues = options.map(x => x.value);
         else
@@ -87,6 +96,7 @@ $(function() {
         label = lastInput.options.nextLabel;
         type = lastInput.options.nextType;
         options = lastInput.options.nextOptions;
+        validator = lastInput.options.nextValidator;
         if (Array.isArray(options))
           optionsValues = options.map(x => x.value);
         else
@@ -168,7 +178,7 @@ $(function() {
         `)
       }  
       
-      lastInput = { title, id, options };
+      lastInput = { title, id, options, validator };
       inputs.push(lastInput);
       
       onChangeHandler();

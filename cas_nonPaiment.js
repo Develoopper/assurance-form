@@ -1,6 +1,7 @@
 var cas_nonPaiment = {
   nextId: "dureeNonPaiement",
   nextLabel: "Nombre de mois en non-paiement",
+  nextValidator: value => !isNaN(value) && value >= 1 && value <= 24,
   nextOptions: {
     values: 'text',
     nextId: "nombreAssureursResiliationNonPaiement",

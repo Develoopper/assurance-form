@@ -21,6 +21,7 @@ var vehicule = {
 						values: 'ajax',
 						nextId: "version",
 						nextLabel: "Version",
+            nextValidator: value => !isNaN(value),
 						nextOptions: {
 							values: 'text',
               nextId: "codeGta",

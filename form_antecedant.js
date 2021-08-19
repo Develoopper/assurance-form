@@ -2,6 +2,7 @@ var form_antecedant = {
 	nextTitle: "Informations antécédent",
 	nextId: "bonusMalus",
 	nextLabel: "Bonus Malus",
+	nextValidator: value => !isNaN(value) && value >= 0.5 && value <= 3.5,
 	nextOptions: {
 		values: "text",
 		nextId: "isEteAssure36DerniersMois",
@@ -10,6 +11,7 @@ var form_antecedant = {
 			values: ["Non", "Oui"],
 			nextId: "periodeAssure36DerniersMois",
 			nextLabel: "Nombre mois assuré au cours des 36 derniers mois",
+			nextValidator: value => !!isNaN(value) && value >= 1 && value <= 36,
 			nextOptions: {
 				values: "text",
 				nextId: "isAssure36DerniersMoisAvec9MoisConsecutifs",
