@@ -1,9 +1,8 @@
 var cas_nonPaiment = {
   nextId: "dureeNonPaiement",
   nextLabel: "Nombre de mois en non-paiement",
-  nextValidator: value => !isNaN(value) && value >= 1 && value <= 24,
   nextOptions: {
-    values: 'text',
+    values: [...Array(24).keys()].map(x => x + 1),
     nextId: "nombreAssureursResiliationNonPaiement",
     nextLabel: "Nombre assureur depuis le non-paiement",
     nextOptions: {
