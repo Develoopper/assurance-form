@@ -11,7 +11,7 @@ var form_antecedant = {
 			values: ["Non", "Oui"],
 			nextId: "periodeAssure36DerniersMois",
 			nextLabel: "Nombre mois assuré au cours des 36 derniers mois",
-			nextValidator: value => !!isNaN(value) && value >= 1 && value <= 36,
+			nextValidator: value => !isNaN(value) && value >= 1 && value <= 36,
 			nextOptions: {
 				values: "text",
 				nextId: "isAssure36DerniersMoisAvec9MoisConsecutifs",

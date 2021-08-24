@@ -3,7 +3,7 @@ var form_infractionsAlcoolemie = {
 	nextId: "dateDernierAlcoolemie36DerniersMois",
 	nextLabel: "Date du teste infraction",
 	nextOptions: {
-		values: "text",
+		values: "date",
 		nextId: "isEuAlcoolemie36DerniersMois",
 		nextLabel: "Positif à l’alcoolémie",
 		nextOptions: [
