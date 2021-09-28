@@ -78,11 +78,10 @@ $(function() {
   }
 
   $('#form input:radio').on('change', function(e) {
-    alert(e.target.value)
-    if (e.target.value === 'Oui')
-      $(`#form div[name=${e.target.name}]`).show();
+    if (e.target.id === e.target.name + 'Oui')
+      $(`#form div[name=${e.target.name}]`).css('display','block');
     else
-      $(`#form div[name=${e.target.name}]`).hide();
+      $(`#form div[name=${e.target.name}]`).css('display','none');
   })
     
   $('#submit').on('click', function() {
