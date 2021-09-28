@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<!-- Bootstrap CSS -->
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+			crossorigin="anonymous"
+		/>
+
+		<title>Form</title>
+	</head>
+	<body>
+		<div class="row mx-5 my-3 d-flex justify-content-center">
+			<div class="row col col-md-8" id="form">
+        
+        <h1 class="my-3">Informations du véhicule</h1>
+
+        <div class='mb-3'>
+					<label for="dateMEC" class="form-label">Date de mise en circulation *</label>
+					<input id="dateMEC" type="date" class="form-control" />
+				</div>
+
+				<div class='col-md-4 mb-3'>
+					<label for="marque" class="form-label">Marque *</label>
+					<select class="form-select" id="marque" disabled></select>
+				</div>
+
+				<div class='col-md-4 mb-3'>
+					<label for="model" class="form-label">Modèle *</label>
+					<select class="form-select" id="model" disabled></select>
+				</div>
+
+				<div class='col-md-4 mb-3'>
+					<label for="alimentation" class="form-label">Alimentation *</label>
+					<select class="form-select" id="alimentation" disabled></select>
+				</div>
+
+				<div class='col-md-4 mb-3'>
+					<label for="chevaux" class="form-label">Cheveaux *</label>
+					<select class="form-select" id="chevaux" disabled></select>
+				</div>
+
+				<div class='col-md-4 mb-3'>
+					<label for="carrosserie" class="form-label">Carrosserie *</label>
+					<select class="form-select" id="carrosserie" disabled></select>
+				</div>
+
+				<div class='col-md-4 mb-3'>
+					<label for="version" class="form-label">Version *</label>
+					<select class="form-select" id="version" disabled></select>
+				</div>
+
+				<div class='col-md-6 mb-3'>
+					<label for="usage" class="form-label">Usage *</label>
+					<select class="form-select" id="usage">
+						<option value="" selected></option>
+						<option value="Promenades privées">Promenades privées</option>
+						<option value="Tournées régulières">Tournées régulières</option>
+						<option value="Déplacements privés et trajet travail">Déplacements privés et trajet travail</option>
+						<option value="Affaire/Commerce">Affaire/Commerce</option>
+						<option value="Taxi">Taxi</option>
+						<option value="VTC">VTC</option>
+						<option value="Agricol">Agricol</option>
+					</select>
+				</div>
+
+				<div class='col-md-6 mb-3'>
+					<label for="stationnement" class="form-label">Stationnement *</label>
+					<select class="form-select" id="stationnement">
+            <option value="" selected></option>
+            <option value="Voie publique">Voie publique</option>
+            <option value="Garage">Garage</option>
+            <option value="Box">Box</option>
+            <option value="Parking couvert collectif">Parking couvert collectif</option>
+            <option value="Parking collectif plein air">Parking collectif plein air</option>
+            <option value="Jardin clos privé">Jardin clos privé</option>
+            <option value="Garage public surveillé">Garage public surveillé</option>
+          </select>
+				</div>
+        
+        <div class='mb-3'>
+					<label for="garantieSouhaiteeConducteurPrincipal" class="form-label">Garanties souhaitées *</label>
+					<select class="form-select" id="garantieSouhaiteeConducteurPrincipal"></select>
+				</div>
+				
+				<!-- --------------------------------------------------- -->
+        <h1 class="my-3">Historique assurance</h1>
+
+				<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+				<div class='mb-3'>
+					<label class="form-label">Avez vous été assuré au cours des 3 dernières années ? *</label><br>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" checked type="radio" name="isEteAssure36DerniersMois" id="isEteAssure36DerniersMoisNon">
+						<label class="form-check-label" for="isEteAssure36DerniersMoisNon">
+							Non							
+						</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="isEteAssure36DerniersMois" id="isEteAssure36DerniersMoisOui">
+						<label class="form-check-label" for="isEteAssure36DerniersMoisOui">
+							Oui							
+						</label>
+					</div>
+				</div>
+				
+				<div class='mb-3 d-none' name="isEteAssure36DerniersMois">
+					<label for="bonusMalus" class="form-label">Bonus ou malus auto *</label>
+					<input id="bonusMalus" class="form-control" />
+				</div>
+				<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+				
+				<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+				<div class='mb-3'>
+					<label class="form-label">Avez vous été résilié au cours des 3 dernières années ? *</label><br>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" checked type="radio" name="isEteResilie36DerniersMois" id="isEteResilie36DerniersMoisOui">
+						<label class="form-check-label" for="isEteResilie36DerniersMoisOui">
+							Non							
+						</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="isEteResilie36DerniersMois" id="isEteResilie36DerniersMoisNon">
+						<label class="form-check-label" for="isEteResilie36DerniersMoisNon">
+							Oui							
+						</label>
+					</div>
+				</div>
+				
+				<div class='mb-3 d-none col-md-6' name="isEteResilie36DerniersMois">
+					<label for="motifResiliation36DerniersMois" class="form-label">Indiquez le motif *</label>
+					<select class="form-select" id="motifResiliation36DerniersMois">
+						<option value=""></option> 
+						<option value="Non paiement">Non paiement</option> 
+						<option value="Alcoolemie">Alcoolemie</option> 
+						<option value="Stupefiant">Stupefiant</option> 
+						<option value="Defaut assurance">Defaut assurance</option> 
+						<option value="Conduite sans permis">Conduite sans permis</option> 
+						<option value="Refus obtemperer">Refus obtemperer</option> 
+						<option value="Exces de vitesse">Exces de vitesse</option> 
+						<option value="Perte de points">Perte de points</option> 
+						<option value="Resiliation client">Resiliation client</option> 
+						<option value="Sinistre">Sinistre</option> 
+						<option value="Sinistre et non paiement de prime">Sinistre et non paiement de prime</option> 
+						<option value="Delit fuite">Delit fuite</option> 
+						<option value="Nulite Contrat">Nulite Contrat</option> 
+						<option value="Sinistre et alcoolemie">Sinistre et alcoolemie</option> 
+						<option value="Sinistre et stupefiant">Sinistre et stupefiant</option> 
+						<option value="Fausse declaration">Fausse declaration</option> 
+						<option value="Suspension annulation permis">Suspension annulation permis</option> 
+						<option value="Autres moti">Autres motif</option>
+					</select>
+				</div>
+				
+				<div class='mb-3 d-none col-md-6' name="isEteResilie36DerniersMois">
+					<label for="dateResiliation36DerniersMois" class="form-label">Date de la résiliation *</label>
+					<input class="form-control" type="date" id="dateResiliation36DerniersMois">
+				</div>
+				<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+				
+				<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+				<div class='mb-3'>
+					<label class="form-label">Avez vous eu des sinistres au cours des 3 dernières années ? *</label><br>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" checked type="radio" name="isEuSinistres36DerniersMois" id="isEuSinistres36DerniersMoisOui">
+						<label class="form-check-label" for="isEuSinistres36DerniersMoisOui">
+							Non							
+						</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="isEuSinistres36DerniersMois" id="isEuSinistres36DerniersMoisNon">
+						<label class="form-check-label" for="isEuSinistres36DerniersMoisNon">
+							Oui							
+						</label>
+					</div>
+				</div>
+
+				<div class='mb-3 d-none col-md-6' name="isEuSinistres36DerniersMois">
+					<label for="natureSinistre36DerniersMois" class="form-label">Nature du dernier sinistre *</label>
+					<select class="form-select" id="natureSinistre36DerniersMois">
+						<option value=""></option>
+						<option value="Materiel non responsable">Materiel non responsable</option>
+						<option value="Materiel responsable">Materiel responsable</option>
+						<option value="Materiel responsable 50">Materiel responsable 50</option>
+						<option value="Corporel Non responsable">Corporel Non responsable</option>
+						<option value="Corporel responsable">Corporel responsable</option>
+						<option value="Corporel Partiellement responsable">Corporel Partiellement responsable</option>
+						<option value="Bris de glace">bris de glace</option>
+						<option value="Vol">Vol</option>
+						<option value="Vandalisme">Vandalisme</option>
+						<option value="Incendie">Incendie</option>
+						<option value="Evenement naturels">Evenement naturels</option>
+						<option value="Dommages en stationnement">Dommages en stationnement</option>
+					</select>
+				</div>
+
+				<div class='mb-3 d-none col-md-6' name="isEuSinistres36DerniersMois">
+					<label for="dateSinistre36DerniersMois" class="form-label">Date du dernier sinistre *</label>
+					<input class="form-control" type="date" id="dateSinistre36DerniersMois">
+				</div>
+				<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+				<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+				<div class='mb-3'>
+					<label class="form-label">Avez vous eu des sanctions pénales ou administratives au cours des 5 dernières années ? *</label><br>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" checked type="radio" name="isEuSanction36DerniersMois" id="isEuSanction36DerniersMoisOui">
+						<label class="form-check-label" for="isEuSanction36DerniersMoisOui">
+							Non							
+						</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="isEuSanction36DerniersMois" id="isEuSanction36DerniersMoisNon">
+						<label class="form-check-label" for="isEuSanction36DerniersMoisNon">
+							Oui							
+						</label>
+					</div>
+				</div>
+				
+				<div class='mb-3 d-none' name="isEuSanction36DerniersMois">
+					<label for="typeSanction" class="form-label">La raison de la sanction *</label>
+					<select class="form-select" id="typeSanction">
+						<option value=""></option>
+						<option value='Annulation permis'>Annulation permis</option>
+						<option value='Suspension permis'>Suspension permis</option>
+						<option value='ATTENTE_JUGEMENT'>ATTENTE_JUGEMENT</option>
+						<option value='COMPOSITION_PENALE'>COMPOSITION_PENALE</option>
+						<option value='CONTRAVENTION_4'>CONTRAVENTION_4</option>
+						<option value='PEINE_PRISON'>PEINE_PRISON</option>
+						<option value='ANNULATION_PERMIS_PEINE_PRISON'>ANNULATION_PERMIS_PEINE_PRISON</option>
+						<option value='SUSPENSION_PERMIS_PEINE_PRISON'>SUSPENSION_PERMIS_PEINE_PRISON</option>
+					</select>
+				</div>
+				<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+				
+				<!-- --------------------------------------------------- -->
+        <h1 class="my-3">Vos Coordonnés</h1>
+
+				<div class='col-md-4 mb-3'>
+					<label for="situationFamiliale" class="form-label">Situation familiale *</label>
+					<input id="situationFamiliale" class="form-control" />
+				</div>
+
+				<div class='col-md-4 mb-3'>
+					<label for="datePermis" class="form-label">Date de permis *</label>
+					<input id="datePermis" class="form-control" />
+				</div>
+				
+				<div class='col-md-4 mb-3'>
+					<label for="dateNaissance" class="form-label">Date de naissance *</label>
+					<input id="dateNaissance" class="form-control" />
+				</div>
+
+				<div class='col-md-4 mb-3'>
+					<label for="civilite" class="form-label">Civilité *</label>
+					<input id="civilite" class="form-control" />
+				</div>
+
+				<div class='col-md-4 mb-3'>
+					<label for="nom" class="form-label">Nom *</label>
+					<input id="nom" class="form-control" />
+				</div>
+
+				<div class='col-md-4 mb-3'>
+					<label for="prenom" class="form-label">Prénom *</label>
+					<input id="prenom" class="form-control" />
+				</div>
+
+				<div class='mb-3'>
+					<label for="adresse" class="form-label">Adresse *</label>
+					<input id="adresse" class="form-control" />
+				</div>
+
+				<div class='col-md-6 mb-3'>
+					<label for="ville" class="form-label">Ville *</label>
+					<input id="ville" class="form-control" />
+				</div>
+
+				<div class='col-md-6 mb-3'>
+					<label for="codePostal" class="form-label">Code postal *</label>
+					<input id="codePostal" class="form-control" />
+				</div>
+
+				<div class='col-md-6 mb-3'>
+					<label for="email" class="form-label">Email *</label>
+					<input id="email" class="form-control" />
+				</div>
+				
+				<div class='col-md-6 mb-3'>
+					<label for="tel" class="form-label">Téléphone *</label>
+					<input id="tel" class="form-control" />
+				</div>
+
+				<div>
+					<label for="commentaires" class="form-label">Vos éventuels commentaires</label>
+					<textarea class="form-control" id="commentaires" rows="4"></textarea>
+				</div>
+
+
+				<button type="button" id="submit" class="my-5 btn btn-dark">Envoyer</button>
+				
+			</div>
+		</div>
+		
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+		
+		<script src="form.js"></script>
+	</body>
+</html>
